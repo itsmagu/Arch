@@ -3,7 +3,7 @@
 #
 # @file Post-Setup
 # @brief Finalizing installation configurations and cleaning up after script.
-source ${HOME}/ArchTitus/configs/setup.conf
+source ${HOME}/Arch/configs/setup.conf
 
 if [[ -d "/sys/firmware/efi" ]]; then
     grub-install --efi-directory=/boot ${DISK}
@@ -27,7 +27,7 @@ THEME_NAME=CyberRe
 echo -e "Creating the theme directory..."
 mkdir -p "${THEME_DIR}/${THEME_NAME}"
 echo -e "Copying the theme..."
-cd ${HOME}/ArchTitus
+cd ${HOME}/Arch
 cp -a configs${THEME_DIR}/${THEME_NAME}/* ${THEME_DIR}/${THEME_NAME}
 echo -e "Backing up Grub config..."
 cp -an /etc/default/grub /etc/default/grub.bak
@@ -38,7 +38,7 @@ echo -e "Updating grub..."
 grub-mkconfig -o /boot/grub/grub.cfg
 echo -e "All set!"
 
-elif [[ "${DESKTOP_ENV}" == "awesome" ]]; then
+if [[ "${DESKTOP_ENV}" == "awesome" ]]; then
   systemctl enable lightdm.service
     echo -ne "
 -------------------------------------------------------------------------
@@ -96,8 +96,8 @@ sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/# %wheel ALL=(ALL:ALL) NOPASSWD: A
 sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
-rm -r $HOME/ArchTitus
-rm -r /home/$USERNAME/ArchTitus
+rm -r $HOME/Arch
+rm -r /home/$USERNAME/Arch
 
 # Replace in the same state
 cd $pwd
