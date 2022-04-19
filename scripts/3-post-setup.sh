@@ -45,6 +45,7 @@ elif [[ "${DESKTOP_ENV}" == "awesome" ]]; then
                     LIGHTDM SERVICE is Enabled
 -------------------------------------------------------------------------
 "
+  git clone 
   if [[ "${INSTALL_TYPE}" == "FULL" ]]; then
     # Set default lightdm-webkit2-greeter theme to Litarvan
     sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = litarvan #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf
