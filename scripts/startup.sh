@@ -1,21 +1,8 @@
 #!/usr/bin/env bash
-#github-action genshdoc
-#
-# @file Startup
-# @brief This script will ask users about their prefrences like disk, file system, timezone, keyboard layout, user name, password, etc.
-# @stdout Output routed to startup.log
-# @stderror Output routed to startup.log
-
-# @setting-header General Settings
-# @setting CONFIG_FILE string[$CONFIGS_DIR/setup.conf] Location of setup.conf to be used by set_option and all subsequent scripts. 
 CONFIG_FILE=$CONFIGS_DIR/setup.conf
 if [ ! -f $CONFIG_FILE ]; then # check if file exists
     touch -f $CONFIG_FILE # create file if not exists
 fi
-
-# @description set options in setup.conf
-# @arg $1 string Configuration variable.
-# @arg $2 string Configuration value.
 set_option() {
     if grep -Eq "^${1}.*" $CONFIG_FILE; then # check if option exists
         sed -i -e "/^${1}.*/d" $CONFIG_FILE # delete option if exists
@@ -136,16 +123,7 @@ select_option() {
 logo () {
 # This will be shown on every set as user is progressing
 echo -ne "
--------------------------------------------------------------------------
- █████╗ ██████╗  ██████╗██╗  ██╗████████╗██╗████████╗██╗   ██╗███████╗
-██╔══██╗██╔══██╗██╔════╝██║  ██║╚══██╔══╝██║╚══██╔══╝██║   ██║██╔════╝
-███████║██████╔╝██║     ███████║   ██║   ██║   ██║   ██║   ██║███████╗
-██╔══██║██╔══██╗██║     ██╔══██║   ██║   ██║   ██║   ██║   ██║╚════██║
-██║  ██║██║  ██║╚██████╗██║  ██║   ██║   ██║   ██║   ╚██████╔╝███████║
-╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝   ╚═╝    ╚═════╝ ╚══════╝
-------------------------------------------------------------------------
-            Please select presetup settings for your system              
-------------------------------------------------------------------------
+>>
 "
 }
 # @description This function will handle file systems. At this movement we are handling only
@@ -209,7 +187,7 @@ keymap () {
 echo -ne "
 Please select key board layout from this list"
 # These are default key maps as presented in official arch repo archinstall
-options=(us by ca cf cz de dk es et fa fi fr gr hu il it lt lv mk nl no pl ro ru sg ua uk)
+options=(us se sv uk)
 
 select_option $? 4 "${options[@]}"
 keymap=${options[$?]}
@@ -317,32 +295,20 @@ installtype () {
 # language (){}
 
 # Starting functions
-clear
-logo
 userinfo
-clear
-logo
 desktopenv
 # Set fixed options that installation uses if user choses server installation
 set_option INSTALL_TYPE MINIMAL
 set_option AUR_HELPER NONE
 if [[ ! $desktop_env == server ]]; then
-  clear
-  logo
   aurhelper
-  clear
-  logo
   installtype
 fi
 clear
-logo
 diskpart
 clear
-logo
 filesystem
 clear
-logo
 timezone
 clear
-logo
 keymap

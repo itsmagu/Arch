@@ -3,22 +3,6 @@
 #
 # @file Post-Setup
 # @brief Finalizing installation configurations and cleaning up after script.
-echo -ne "
--------------------------------------------------------------------------
-   █████╗ ██████╗  ██████╗██╗  ██╗████████╗██╗████████╗██╗   ██╗███████╗
-  ██╔══██╗██╔══██╗██╔════╝██║  ██║╚══██╔══╝██║╚══██╔══╝██║   ██║██╔════╝
-  ███████║██████╔╝██║     ███████║   ██║   ██║   ██║   ██║   ██║███████╗
-  ██╔══██║██╔══██╗██║     ██╔══██║   ██║   ██║   ██║   ██║   ██║╚════██║
-  ██║  ██║██║  ██║╚██████╗██║  ██║   ██║   ██║   ██║   ╚██████╔╝███████║
-  ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝   ╚═╝    ╚═════╝ ╚══════╝
--------------------------------------------------------------------------
-                    Automated Arch Linux Installer
-                        SCRIPTHOME: ArchTitus
--------------------------------------------------------------------------
-
-Final Setup and Configurations
-GRUB EFI Bootloader Install & Check
-"
 source ${HOME}/ArchTitus/configs/setup.conf
 
 if [[ -d "/sys/firmware/efi" ]]; then
@@ -93,8 +77,6 @@ echo -ne "
                     Enabling Essential Services
 -------------------------------------------------------------------------
 "
-systemctl enable cups.service
-echo "  Cups enabled"
 ntpd -qg
 systemctl enable ntpd.service
 echo "  NTP enabled"
@@ -108,23 +90,6 @@ systemctl enable bluetooth
 echo "  Bluetooth enabled"
 systemctl enable avahi-daemon.service
 echo "  Avahi enabled"
-
-if [[ "${FS}" == "luks" || "${FS}" == "btrfs" ]]; then
-echo -ne "
--------------------------------------------------------------------------
-                    Creating Snapper Config
--------------------------------------------------------------------------
-"
-
-SNAPPER_CONF="$HOME/ArchTitus/configs/etc/snapper/configs/root"
-mkdir -p /etc/snapper/configs/
-cp -rfv ${SNAPPER_CONF} /etc/snapper/configs/
-
-SNAPPER_CONF_D="$HOME/ArchTitus/configs/etc/conf.d/snapper"
-mkdir -p /etc/conf.d/
-cp -rfv ${SNAPPER_CONF_D} /etc/conf.d/
-
-fi
 
 echo -ne "
 -------------------------------------------------------------------------

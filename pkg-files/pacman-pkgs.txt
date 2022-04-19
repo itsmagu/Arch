@@ -11,6 +11,7 @@ dosfstools
 linux-headers
 noto-fonts-emoji
 usbutils
+zsh
 xdg-user-dirs
 autoconf
 automake
