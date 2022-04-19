@@ -39,13 +39,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo -e "All set!"
 
 if [[ "${DESKTOP_ENV}" == "awesome" ]]; then
+  git clone https://github.com/itsmagu/awesome /home/$USERNAME/.config/awesome
   systemctl enable lightdm.service
     echo -ne "
 -------------------------------------------------------------------------
                     LIGHTDM SERVICE is Enabled
 -------------------------------------------------------------------------
 "
-  git clone https://github.com/itsmagu/awesome ${HOME}/.config/
   if [[ "${INSTALL_TYPE}" == "FULL" ]]; then
     # Set default lightdm-webkit2-greeter theme to Litarvan
     sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = litarvan #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf
