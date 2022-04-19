@@ -38,25 +38,7 @@ echo -e "Updating grub..."
 grub-mkconfig -o /boot/grub/grub.cfg
 echo -e "All set!"
 
-echo -ne "
--------------------------------------------------------------------------
-               Enabling (and Theming) Login Display Manager
--------------------------------------------------------------------------
-"
-if [[ ${DESKTOP_ENV} == "kde" ]]; then
-  systemctl enable sddm.service
-  if [[ ${INSTALL_TYPE} == "FULL" ]]; then
-    echo [Theme] >>  /etc/sddm.conf
-    echo Current=Nordic >> /etc/sddm.conf
-  fi
-
-elif [[ "${DESKTOP_ENV}" == "gnome" ]]; then
-  systemctl enable gdm.service
-
-elif [[ "${DESKTOP_ENV}" == "lxde" ]]; then
-  systemctl enable lxdm.service
-
-elif [[ "${DESKTOP_ENV}" == "openbox" ]]; then
+elif [[ "${DESKTOP_ENV}" == "awesome" ]]; then
   systemctl enable lightdm.service
   if [[ "${INSTALL_TYPE}" == "FULL" ]]; then
     # Set default lightdm-webkit2-greeter theme to Litarvan
@@ -90,25 +72,6 @@ systemctl enable bluetooth
 echo "  Bluetooth enabled"
 systemctl enable avahi-daemon.service
 echo "  Avahi enabled"
-
-echo -ne "
--------------------------------------------------------------------------
-               Enabling (and Theming) Plymouth Boot Splash
--------------------------------------------------------------------------
-"
-PLYMOUTH_THEMES_DIR="$HOME/ArchTitus/configs/usr/share/plymouth/themes"
-PLYMOUTH_THEME="arch-glow" # can grab from config later if we allow selection
-mkdir -p /usr/share/plymouth/themes
-echo 'Installing Plymouth theme...'
-cp -rf ${PLYMOUTH_THEMES_DIR}/${PLYMOUTH_THEME} /usr/share/plymouth/themes
-if  [[ $FS == "luks"]]; then
-  sed -i 's/HOOKS=(base udev*/& plymouth/' /etc/mkinitcpio.conf # add plymouth after base udev
-  sed -i 's/HOOKS=(base udev \(.*block\) /&plymouth-/' /etc/mkinitcpio.conf # create plymouth-encrypt after block hook
-else
-  sed -i 's/HOOKS=(base udev*/& plymouth/' /etc/mkinitcpio.conf # add plymouth after base udev
-fi
-plymouth-set-default-theme -R arch-glow # sets the theme and runs mkinitcpio
-echo 'Plymouth theme installed'
 
 echo -ne "
 -------------------------------------------------------------------------

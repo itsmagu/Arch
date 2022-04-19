@@ -20,7 +20,6 @@ timedatectl --no-ask-password set-timezone ${TIMEZONE}
 timedatectl --no-ask-password set-ntp 1
 localectl --no-ask-password set-locale LANG="en_US.UTF-8" LC_TIME="en_US.UTF-8"
 ln -s /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
-# Set keymaps
 localectl --no-ask-password set-keymap ${KEYMAP}
 
 # Add sudo no password rights
@@ -53,7 +52,6 @@ elif grep -E "AuthenticAMD" <<< ${proc_type}; then
     pacman -S --noconfirm --needed amd-ucode
     proc_ucode=amd-ucode.img
 fi
-sleep 1
 
 echo -ne "
 -------------------------------------------------------------------------
@@ -77,7 +75,6 @@ elif grep -E "Intel Corporation UHD" <<< ${gpu_type}; then
     pacman -S --needed --noconfirm libva-intel-driver libvdpau-va-gl lib32-vulkan-intel vulkan-intel libva-intel-driver libva-utils lib32-mesa
     echo "So installed MESA for Intel"
 fi
-sleep 1
 #SETUP IS WRONG THIS IS RUN
 if ! source $HOME/ArchTitus/configs/setup.conf; then
 	# Loop through user input until the user gives a valid username

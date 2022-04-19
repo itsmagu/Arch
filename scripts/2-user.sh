@@ -2,7 +2,6 @@
 echo -ne "
 Installing Over Base System
 "
-sleep 5
 source $HOME/ArchTitus/configs/setup.conf
 
   cd ~

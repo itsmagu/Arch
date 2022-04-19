@@ -7,6 +7,5 @@ mangohud
 mangohud-common
 nerd-fonts-fira-code
 ocs-url
-plymouth-git
 ttf-meslo
 bridge-utils

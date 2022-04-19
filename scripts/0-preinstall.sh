@@ -112,7 +112,6 @@ echo "
   Generated /etc/fstab:
 "
 cat /mnt/etc/fstab
-sleep 1
 if [[ ! -d "/sys/firmware/efi" ]]; then
     grub-install --boot-directory=/mnt/boot ${DISK}
 else
