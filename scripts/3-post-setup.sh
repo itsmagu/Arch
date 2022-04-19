@@ -40,6 +40,11 @@ echo -e "All set!"
 
 elif [[ "${DESKTOP_ENV}" == "awesome" ]]; then
   systemctl enable lightdm.service
+    echo -ne "
+-------------------------------------------------------------------------
+                    LIGHTDM SERVICE is Enabled
+-------------------------------------------------------------------------
+"
   if [[ "${INSTALL_TYPE}" == "FULL" ]]; then
     # Set default lightdm-webkit2-greeter theme to Litarvan
     sed -i 's/^webkit_theme\s*=\s*\(.*\)/webkit_theme = litarvan #\1/g' /etc/lightdm/lightdm-webkit2-greeter.conf
@@ -51,6 +56,11 @@ else
   if [[ ! "${DESKTOP_ENV}" == "server"  ]]; then
   sudo pacman -S --noconfirm --needed lightdm lightdm-gtk-greeter
   systemctl enable lightdm.service
+  echo -ne "
+-------------------------------------------------------------------------
+                    LIGHTDM SERVICE is Enabled
+-------------------------------------------------------------------------
+"
   fi
 fi
 
