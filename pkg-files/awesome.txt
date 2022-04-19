@@ -44,3 +44,14 @@ lutris
 libretro
 steam
 rustup
+etcher-bin
+libvirt
+edk2-ovmf
+virt-manager
+virt-viewer
+qemu
+openbsd-netcat
+dnsmasq
+bridge-utils
+iptables-nft
+libguestfs
