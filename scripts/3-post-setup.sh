@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-#github-action genshdoc
-#
-# @file Post-Setup
-# @brief Finalizing installation configurations and cleaning up after script.
 source ${HOME}/Arch/configs/setup.conf
 
 if [[ -d "/sys/firmware/efi" ]]; then
@@ -83,6 +79,16 @@ systemctl enable bluetooth
 echo "  Bluetooth enabled"
 systemctl enable avahi-daemon.service
 echo "  Avahi enabled"
+sudo systemctl enable libvirtd.service
+echo " Libvirtual enabled"
+
+echo -ne "
+-------------------------------------------------------------------------
+                    Writing Configs
+-------------------------------------------------------------------------
+"
+
+sed -i -e 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/g' /etc/libvirt/libvirtd.conf
 
 echo -ne "
 -------------------------------------------------------------------------

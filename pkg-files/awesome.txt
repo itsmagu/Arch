@@ -53,8 +53,10 @@ qemu
 openbsd-netcat
 dnsmasq
 bridge-utils
+ebtables
+libguestfs 
+iptables
 iptables-nft
-libguestfs
 i3lock-fancy 
 xclip 
 ttf-roboto 
