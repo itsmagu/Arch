@@ -8,3 +8,4 @@ nerd-fonts-fira-code
 ocs-url
 ttf-meslo
 bridge-utils
+system-monitoring-center

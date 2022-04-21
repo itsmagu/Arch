@@ -89,6 +89,11 @@ echo -ne "
 "
 
 sed -i -e 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/g' /etc/libvirt/libvirtd.conf
+sed -i -e 's/unix_sock_rw_perms = "0777"/unix_sock_rw_perms = "0770"/g' /etc/libvirt/libvirtd.conf
+usermod -a -G libvirt $USERNAME
+modprobe -r kvm_intel
+modprobe kvm_intel nested=1
+echo "options kvm-intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf
 
 echo -ne "
 -------------------------------------------------------------------------
