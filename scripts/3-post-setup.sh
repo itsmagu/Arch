@@ -53,11 +53,12 @@ else
   if [[ ! "${DESKTOP_ENV}" == "server"  ]]; then
   sudo pacman -S --noconfirm --needed lightdm lightdm-gtk-greeter
   systemctl enable lightdm.service
+  
   echo -ne "
 -------------------------------------------------------------------------
                     LIGHTDM SERVICE is Enabled
 -------------------------------------------------------------------------
-"
+  "
   fi
 fi
 
@@ -88,8 +89,14 @@ echo -ne "
 -------------------------------------------------------------------------
 "
 
-localectl --no-ask-password set-x11-keymap ${KEYMAP}
 echo "root:$PASSWORD" | chpasswd
+if [[ "${DESKTOP_ENV}" == "awesome" ]]; then
+cd /
+localectl --no-ask-password set-x11-keymap ${KEYMAP}
+sh -c "$(curl -fsLS chezmoi.io/get)"
+chezmoi init --apply https://github.com/itsmagu/dotconf
+fi
+rustup install stable
 
 echo -ne "
 -------------------------------------------------------------------------
