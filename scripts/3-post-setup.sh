@@ -90,26 +90,6 @@ echo -ne "
 "
 
 echo "root:$PASSWORD" | chpasswd
-if [[ "${DESKTOP_ENV}" == "awesome" ]]; then
-cd /
-localectl --no-ask-password set-x11-keymap ${KEYMAP}
-sh -c "$(curl -fsLS chezmoi.io/get)"
-chezmoi init --apply https://github.com/itsmagu/dotconf
-fi
-rustup install stable
-
-echo -ne "
--------------------------------------------------------------------------
-                    Writing Configs
--------------------------------------------------------------------------
-"
-
-sed -i -e 's/#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/g' /etc/libvirt/libvirtd.conf
-sed -i -e 's/unix_sock_rw_perms = "0777"/unix_sock_rw_perms = "0770"/g' /etc/libvirt/libvirtd.conf
-usermod -a -G libvirt $USERNAME
-modprobe -r kvm_intel
-modprobe kvm_intel nested=1
-echo "options kvm-intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf
 
 echo -ne "
 -------------------------------------------------------------------------
