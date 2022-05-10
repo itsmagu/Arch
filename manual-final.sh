@@ -50,12 +50,11 @@ echo -ne "
 
 echo -ne "
 -------------------------------------------------------------------------
-                    Syncing Dotfiles
+                    Installing Chezmoi
 -------------------------------------------------------------------------
 "
 cd /
 sudo sh -c "$(curl -fsLS chezmoi.io/get)"
-chezmoi init --apply https://github.com/itsmagu/dotconf
 
 echo -ne "
 -------------------------------------------------------------------------
