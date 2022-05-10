@@ -35,7 +35,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo -e "All set!"
 
 if [[ "${DESKTOP_ENV}" == "awesome" ]]; then
-  git clone https://github.com/itsmagu/awesome /home/$USERNAME/.config/awesome
+  sudo -u shiro git clone https://github.com/itsmagu/awesome /home/$USERNAME/.config/awesome
   systemctl enable lightdm.service
     echo -ne "
 -------------------------------------------------------------------------
