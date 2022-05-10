@@ -83,6 +83,12 @@ echo "  Avahi enabled"
 sudo systemctl enable libvirtd.service
 echo " Libvirtual enabled"
 
+echo -ne "
+-------------------------------------------------------------------------
+                    Last WriteUp
+-------------------------------------------------------------------------
+"
+
 echo "root:$PASSWORD" | chpasswd
 
 echo -ne "

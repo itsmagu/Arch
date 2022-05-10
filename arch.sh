@@ -20,6 +20,7 @@ set +a
     ( arch-chroot /mnt $HOME/Arch/scripts/3-post-setup.sh )|& tee 3-post-setup.log
     cp -v *.log /mnt/home/$USERNAME
     cp -v ./Arch/manual-final.sh /mnt/home/$USERNAME
+    echo 'XKBLAYOUT = "se"' >> /etc/default/keyboard
 
 echo -ne "
 -------------------------------------------------------------------------
