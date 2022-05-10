@@ -88,6 +88,8 @@ echo -ne "
 -------------------------------------------------------------------------
 "
 localectl --no-ask-password set-x11-keymap se
+setxkbmap se
+setxkbmap -option 'caps:escape'
 
 echo -ne "
 ----------------------------------------------------------------
