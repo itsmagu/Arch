@@ -80,7 +80,7 @@ echo -ne "
                     Installing pnpm / Node.js alt
 -------------------------------------------------------------------------
 "
-curl -fsSL https://get.pnpm.io/install.sh | sh -
+sudo -u shiro curl -fsSL https://get.pnpm.io/install.sh | sh -
 
 echo -ne "
 -------------------------------------------------------------------------
