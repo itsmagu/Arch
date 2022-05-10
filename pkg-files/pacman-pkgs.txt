@@ -90,3 +90,4 @@ wine-gecko
 wine-mono
 winetricks
 zip
+ranger
