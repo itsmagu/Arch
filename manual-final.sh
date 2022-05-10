@@ -54,7 +54,7 @@ echo -ne "
 -------------------------------------------------------------------------
 "
 cd /
-sh -c "$(curl -fsLS chezmoi.io/get)"
+sudo sh -c "$(curl -fsLS chezmoi.io/get)"
 chezmoi init --apply https://github.com/itsmagu/dotconf
 
 echo -ne "
